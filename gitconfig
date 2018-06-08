@@ -1,0 +1,50 @@
+[user]
+	name = Maxime Rouyrre
+	email = rouyrre+git@gmail.com
+
+[github]
+	user = blaze33
+
+[alias]
+	l = "!source ~/.githelpers && prett_git_log"
+	wdiff = diff --color-words
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
+
+[color "branch"]
+	current = yellow reverse
+	remote = green bold
+	local = blue bold
+
+[color "diff"]
+	meta = blue bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
+[push]
+	default = current
+
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+	pager = less -r
+
+[merge]
+	tool = mymeld
+	conflictstyle = diff3
+
+[mergetool "mymeld"]
+	cmd = LC_ALL=en_US.utf8 meld --diff $BASE $LOCAL --diff $BASE $REMOTE --diff $LOCAL $MERGED $REMOTE
+
+[gui]
+	editor = subl
+	historybrowser = gitg
+[cola]
+	fontdiff = Ubuntu Mono,11,-1,5,50,0,0,0,0,0
+	tabwidth = 4

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+ps aux --sort rss |
+awk '
+{
+    seen[$11]++
+    mem[$11] += $6
+    n += 1
+    ram += $6
+}
+END {
+    printf t
+    for (p in seen) {
+        printf "%-65s %8d %8d %8.1f%%\n", p, seen[p], mem[p]/1024, mem[p]/ram*100
+    }
+    printf "%-65s %8s %8d %8.1f%%\n","Total:",n,ram/1024,100
+}' |
+sort -k3n |
+tail -20

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+rsync -av $1:$HOME/Images/photo/ 		  $HOME/Images/photo
+rsync -av $1:$HOME/.local/share/shotwell/ $HOME/.local/share/shotwell/
+rsync -av $1:$HOME/.cache/shotwell/ 	  $HOME/.cache/shotwell/
+echo "Photo albums are synced."

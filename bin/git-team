@@ -1,0 +1,48 @@
+#!/bin/bash
+# by http://github.com/jacobevans
+# -- Added some nice color/formatting
+# modified from http://github.com/kortina
+# modified from http://github.com/jehiah
+# this prints out branch ahead/behind status vs origin/master for all branches
+
+# example:
+# $ git branch-status
+# dns_check (ahead 1) | (behind 112) origin/master
+# master (ahead 2) | (behind 0) origin/master
+
+git for-each-ref --format="%(refname:short) %(upstream:short)" refs/ | \
+while read local remote
+do
+    if [ -x $remote ]; then
+        branches=("$local")
+    else
+        branches=("$local" "$remote")
+    fi;
+    for branch in ${branches[@]}; do
+		if [ "$branch" != "origin/master" ]; then
+	        master="origin/master"
+	        git rev-list --left-right ${branch}...${master} -- 2>/dev/null >/tmp/git_upstream_status_delta || continue
+
+	        LEFT_AHEAD=$(grep -c '^<' /tmp/git_upstream_status_delta)
+	        RIGHT_AHEAD=$(grep -c '^>' /tmp/git_upstream_status_delta)
+
+			if [[ $LEFT_AHEAD -gt 0 || $RIGHT_AHEAD -gt 0 ]]; then
+	 			printf " - \033[1m%-50s\033[0m (" $branch
+			else
+				printf " - %-50s (" $branch
+			fi;
+			if [[ $LEFT_AHEAD -gt 0 ]]; then
+				printf "\033[36mahead %3d\033[0m" $LEFT_AHEAD
+			else
+				printf "ahead %3d" $LEFT_AHEAD
+			fi;
+			echo -n ") | ("
+			if [[ $RIGHT_AHEAD -gt 0 ]]; then
+				printf "\033[31mbehind %3d\033[0m" $RIGHT_AHEAD
+			else
+				printf "behind %3d" $RIGHT_AHEAD
+			fi;
+	        echo -e ") $master"
+		fi;
+    done
+done | sort -k5rn -k8n | uniq

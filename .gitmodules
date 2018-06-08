@@ -1,0 +1,6 @@
+[submodule "bin/submodules/speedtest-cli"]
+	path = bin/submodules/speedtest-cli
+	url = git://github.com/sivel/speedtest-cli.git
+[submodule "bin/submodules/s3cmd"]
+	path = bin/submodules/s3cmd
+	url = git://github.com/s3tools/s3cmd.git
