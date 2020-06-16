@@ -43,8 +43,9 @@
 	cmd = LC_ALL=en_US.utf8 meld --diff $BASE $LOCAL --diff $BASE $REMOTE --diff $LOCAL $MERGED $REMOTE
 
 [gui]
-	editor = subl
+	editor = code
 	historybrowser = gitg
 [cola]
 	fontdiff = Ubuntu Mono,11,-1,5,50,0,0,0,0,0
 	tabwidth = 4
+	spellcheck = false

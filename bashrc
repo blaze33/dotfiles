@@ -5,6 +5,8 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+LANG="en_US.UTF-8"
+
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoreboth:erasedups
@@ -152,6 +154,9 @@ alias t='python ~/bin/t/t.py --task-dir ~/Dropbox/tasks --list tasks'
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+### Add pip3 user packages
+export PATH="/home/maxime/.local/bin:$PATH"
+
 # Load tmuxinator
 export EDITOR='vim'
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
@@ -174,3 +179,10 @@ eval "$(direnv hook bash)"
 
 # recursive glob http://unix.stackexchange.com/a/49917/3547
 shopt -s globstar
+
+# tabtab source for packages
+# uninstall by removing these lines
+[ -f ~/.config/tabtab/__tabtab.bash ] && . ~/.config/tabtab/__tabtab.bash || true
+
+# add Pulumi to the PATH
+export PATH=$PATH:$HOME/.pulumi/bin
