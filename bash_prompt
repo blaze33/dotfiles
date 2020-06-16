@@ -115,4 +115,4 @@ ${PROMPT_SYMBOL} "
 }
 
 # Tell bash to execute this function just before displaying its prompt.
-PROMPT_COMMAND=set_bash_prompt
+PROMPT_COMMAND="${PROMPT_COMMAND} set_bash_prompt"

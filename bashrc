@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-LANG="en_US.UTF-8"
+export LC_ALL=C
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -14,11 +14,12 @@ HISTCONTROL=ignoreboth:erasedups
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=300000
 HISTFILESIZE=9000000
-HISTTIMEFORMAT=`echo -e "\033[1;34m%F \033[1;31m%T \033[0m"`
+HISTTIMEFORMAT=`echo -e "\033[1;34m%F \033[1;31m%T%z \033[0m "`
 
 # append to the history file, don't overwrite it
 shopt -s histappend
-export PROMPT_COMMAND='history -a; history -n;history 1 >> ${HOME}/.bash_eternal_history'
+# export PROMPT_COMMAND='history -a; history -n;history 1 >> ${HOME}/.bash_eternal_history'
+export PROMPT_COMMAND='history -n; history -w; history -c; history -r; history 1 >> ${HOME}/.bash_eternal_history;'
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -131,10 +132,6 @@ alias gti="git"
 alias git='LANG=en_US git'
 # Ensure meld doesn't crash when git speaks english
 alias meld='LC_ALL=en_US.utf8 meld'
-# Set color bash prompt according to active virtualenv, git branch,
-# mercurial branch and return status of last command.
-# https://gist.github.com/2484714
-source ~/.bash_prompt
 
 # use ddccontrol to configure an external screen, works for LG IPS236
 lcd-setup() {
@@ -173,6 +170,11 @@ alias remove-git-cola-translation="sudo mv /usr/share/locale/fr/LC_MESSAGES/git-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Set color bash prompt according to active virtualenv, git branch,
+# mercurial branch and return status of last command.
+# https://gist.github.com/2484714
+source ~/.bash_prompt
 
 # cf. https://github.com/direnv/direnv#bash
 eval "$(direnv hook bash)"
