@@ -5,7 +5,9 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export LC_ALL=C
+export LC_ALL=C.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
