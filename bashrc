@@ -109,22 +109,27 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-#virtualenvwrapper config
-export WORKON_HOME="$HOME/.virtualenvs"
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
-# virtualenv aliases
-# http://blog.doughellmann.com/2010/01/virtualenvwrapper-tips-and-tricks.html
-alias v='workon'
-alias v.deactivate='deactivate'
-alias v.mk='mkvirtualenv --no-site-packages'
-alias v.mk_withsitepackages='mkvirtualenv'
-alias v.rm='rmvirtualenv'
-alias v.switch='workon'
-alias v.add2virtualenv='add2virtualenv'
-alias v.cdsitepackages='cdsitepackages'
-alias v.cd='cdvirtualenv'
-alias v.lssitepackages='lssitepackages'
-complete -o default -o nospace -F _virtualenvs v
+# #virtualenvwrapper config
+# export WORKON_HOME="$HOME/.virtualenvs"
+# source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+# # virtualenv aliases
+# # http://blog.doughellmann.com/2010/01/virtualenvwrapper-tips-and-tricks.html
+# alias v='workon'
+# alias v.deactivate='deactivate'
+# alias v.mk='mkvirtualenv --no-site-packages'
+# alias v.mk_withsitepackages='mkvirtualenv'
+# alias v.rm='rmvirtualenv'
+# alias v.switch='workon'
+# alias v.add2virtualenv='add2virtualenv'
+# alias v.cdsitepackages='cdsitepackages'
+# alias v.cd='cdvirtualenv'
+# alias v.lssitepackages='lssitepackages'
+# complete -o default -o nospace -F _virtualenvs v
+# venv config
+export VENV_HOME=~/.venvs
+export VENV_PYTHON=/usr/bin/python3
+source ~/github/dotfiles/virtualenvwrapper-venv-aliases.sh
+
 
 alias gedit='LANG=en_US gedit'
 alias tmux="tmux -2"
